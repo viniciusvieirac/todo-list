@@ -1,6 +1,9 @@
+import { useState } from 'react';
+import clipboard from './../../assets/clipboard.svg';
 import style from './Tasks.module.css';
 
 export function Tasks(){
+    const [tasks, setTasks] = useState<string[]>([]);
     return(
         <div className={style.tasksContainer}>
             <div className={style.infos}>
@@ -14,7 +17,18 @@ export function Tasks(){
                 </div>     
             </div>
             <div className={style.tasks}>
-                <h2>vasco</h2>
+               {tasks.length === 0 ? 
+               (
+                <div className={style.notTasks}>
+                    <img src={clipboard} />
+                   <span>Você ainda não tem tarefas</span>
+                   <p>Crie tarefas e organize seus itens a fazer</p>
+                </div>
+               )
+                : 
+                (
+                <div> teste </div>
+                )}
             </div> 
         </div>
     )

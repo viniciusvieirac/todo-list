@@ -1,7 +1,6 @@
 import style from './Form.module.css'
 import { IoMdAddCircleOutline } from 'react-icons/io';
 
-
 export function Form(){
     return(
         <form className={style.inputContainers}>

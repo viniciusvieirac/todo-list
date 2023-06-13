@@ -6,7 +6,6 @@
     left: 0;
     right: 0;
     top: 18rem;
-    border: 1px solid red;
   }
   
 
@@ -29,6 +28,7 @@
     color: var(--blue);
     font-weight: bold;
     font-size: 0.8rem;
+    filter: drop-shadow(0px 4px 6px var(--gray-700));
 }
 
 .tasksCreate > span {
@@ -37,6 +37,7 @@
     border-radius: 50%;
     color: var(--gray-200);
     background-color: var(--gray-400);
+    filter: drop-shadow(0px 5px 7px var(--gray-700));
     padding: 0.4rem;
 }
 
@@ -51,6 +52,7 @@
     color: var(--purple);
     font-weight: bold;
     font-size: 0.8rem;
+    filter: drop-shadow(0px 4px 6px var(--gray-700));
 }
 
 .tasksComplete > span {
@@ -59,6 +61,7 @@
   border-radius: 50%;
   color: var(--gray-200);
   background-color: var(--gray-400);
+  filter: drop-shadow(0px 5px 7px var(--gray-700));
   padding: 0.4rem;
 }
 
@@ -67,5 +70,27 @@
     align-items: center;
     justify-content: center;
     flex-direction: column; 
-    color: var(--gray-200)
+    color: var(--gray-200);
+    border-top: 2px solid var(--gray-400);
   }
+
+.notTasks {
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    text-align: center;
+    width: 100%;
+    flex-direction: column;
+    color: var(--gray-300);
+}
+
+.notTasks > span {
+    margin-top: 1.5rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.notTasks > p {
+    margin-top: 0.5rem;
+    font-size: 0.7rem;
+}
