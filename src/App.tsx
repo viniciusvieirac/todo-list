@@ -1,11 +1,13 @@
 import { Header } from "./components/Header/Header";
-import { Inputs } from "./components/Inputs/Inputs";
+import { Form } from "./components/Form/Form";
+import { Tasks } from "./components/Tasks/Tasks";
 
 export default function App() {
   return (
     <>
       <Header />
-      <Inputs />
+      <Form />
+      <Tasks />
     </>
   )
 }
