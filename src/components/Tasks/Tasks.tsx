@@ -1,9 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect  } from 'react';
 import clipboard from './../../assets/clipboard.svg';
 import style from './Tasks.module.css';
 
+
+type TaskType = {
+    id: number,
+    task: string,
+}
+
 export function Tasks(){
-    const [tasks, setTasks] = useState<string[]>([]);
+    const [tasks, setTasks] = useState<TaskType[]>([]);
+    
+    useEffect(() => {
+        const savedTasks = localStorage.getItem('tasks');
+        const tasksFromLocalStorage: TaskType[] = savedTasks ? JSON.parse(savedTasks) : [];
+        setTasks(tasksFromLocalStorage);
+    }, []);
+    
     return(
         <div className={style.tasksContainer}>
             <div className={style.infos}>
@@ -27,7 +40,9 @@ export function Tasks(){
                )
                 : 
                 (
-                <div> teste </div>
+                 <div>{tasks.map((task) => (
+                    <div key={task.id}>{task.task}</div>
+                 ))}</div>
                 )}
             </div> 
         </div>
