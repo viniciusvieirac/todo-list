@@ -94,3 +94,21 @@
     margin-top: 0.5rem;
     font-size: 0.7rem;
 }
+
+.taskList {
+    display: flex;
+    border: 1px solid var(--gray-500);
+    border-radius: 8px;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--gray-500);
+}
+
+.taskList > p {
+    color: var(--gray-100);
+    font-size: 0.9rem;
+}

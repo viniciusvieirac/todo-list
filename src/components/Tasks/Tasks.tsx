@@ -1,5 +1,5 @@
-import { useState, useEffect  } from 'react';
 import clipboard from './../../assets/clipboard.svg';
+import trash from './../../assets/trash.svg';
 import style from './Tasks.module.css';
 
 
@@ -8,21 +8,14 @@ type TaskType = {
     task: string,
 }
 
-export function Tasks(){
-    const [tasks, setTasks] = useState<TaskType[]>([]);
-    
-    useEffect(() => {
-        const savedTasks = localStorage.getItem('tasks');
-        const tasksFromLocalStorage: TaskType[] = savedTasks ? JSON.parse(savedTasks) : [];
-        setTasks(tasksFromLocalStorage);
-    }, []);
-    
+export function Tasks({ tasks }: { tasks: TaskType[] }){
+  
     return(
         <div className={style.tasksContainer}>
             <div className={style.infos}>
                 <div className={style.tasksCreate}>
                     <p>Tarefas Criadas</p>
-                    <span>0</span>
+                    <span>{tasks.length}</span>
                 </div>
                 <div className={style.tasksComplete}>
                     <p>Concluidas</p>
@@ -40,9 +33,17 @@ export function Tasks(){
                )
                 : 
                 (
-                 <div>{tasks.map((task) => (
-                    <div key={task.id}>{task.task}</div>
-                 ))}</div>
+                    <>
+                {tasks.map((task) => (
+                    <div key={task.id} className={style.taskList}>
+                        <input type="checkbox" name="" id="" />
+                        <p>{task.task}</p>
+                        <button type='button'>
+                            <img src={trash} />
+                        </button>
+                    </div>
+                 ))}
+                    </>
                 )}
             </div> 
         </div>

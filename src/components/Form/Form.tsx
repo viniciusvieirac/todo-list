@@ -1,6 +1,7 @@
 import style from './Form.module.css';
 import { useState, useEffect } from 'react';
 import { IoMdAddCircleOutline } from 'react-icons/io';
+import { Tasks } from '../Tasks/Tasks';
 
 type TaskType = {
     id: number,
@@ -57,6 +58,7 @@ export function Form(){
                     }} 
                 />
             </button>
+            <Tasks tasks={tasks} />
         </form>
     )
 }
