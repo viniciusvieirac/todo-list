@@ -19,7 +19,12 @@ export function Form(){
           id: tasks.length + 1,
           task: inputTask,
         }
-      
+        
+        //tem que ser refatorado e por um aviso
+        if(newTask.task === ''){
+            return 
+        }
+
         const updatedTasks = [...tasks, newTask];
         setTasks(updatedTasks);
         setInputTask('');

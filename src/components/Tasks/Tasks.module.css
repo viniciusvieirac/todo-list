@@ -111,7 +111,26 @@
     color: var(--gray-100);
     font-size: 0.9rem;
     overflow-wrap: break-word;
-    flex: 1; /* Adicione essa linha */
 }
+
+.taskList > p {
+    color: var(--gray-100);
+    font-size: 0.9rem;
+    overflow-wrap: break-word;
+}
+
+.taskList > button {
+    color: var(--gray-300);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.taskList > button:hover {
+    background: var(--gray-400);
+    color: var(--danger);
+    cursor: pointer;
+}
+
 
 
