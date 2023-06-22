@@ -6,6 +6,7 @@ import { Tasks } from '../Tasks/Tasks';
 type TaskType = {
     id: number,
     task: string,
+    isChecked: boolean,
 }
 
 export function Form(){
@@ -18,6 +19,7 @@ export function Form(){
         const newTask: TaskType = {
           id: tasks.length + 1,
           task: inputTask,
+          isChecked: false,
         }
         
         //tem que ser refatorado e por um aviso
@@ -35,13 +37,37 @@ export function Form(){
       useEffect(() => {
         const savedTasks = localStorage.getItem('tasks');
         const tasksFromLocalStorage: TaskType[] = savedTasks ? JSON.parse(savedTasks) : [];
-        setTasks(tasksFromLocalStorage);
+      
+        // Atualiza isChecked com base nos valores salvos no localStorage
+        const updatedTasks = tasksFromLocalStorage.map(task => ({
+          ...task,
+          isChecked: Boolean(task.isChecked),
+        }));
+      
+        setTasks(updatedTasks);
       }, []);
       
 
     const handleTask = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputTask(event.target.value);
     };
+
+    const handleTaskCheck = (taskId: number) => {
+        const updatedTasks = tasks.map(task => {
+          if (task.id === taskId) {
+            return {
+              ...task,
+              isChecked: !task.isChecked,
+            };
+          }
+          return task;
+        });
+        console.log('clicou');
+        
+        setTasks(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      };
+
     return(
         <form onSubmit={handleSubmit} className={style.inputContainers}>
             <input 
@@ -63,7 +89,7 @@ export function Form(){
                     }} 
                 />
             </button>
-            <Tasks tasks={tasks} />
+            <Tasks tasks={tasks} handleTaskCheck={handleTaskCheck} />
         </form>
     )
 }
