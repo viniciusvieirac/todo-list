@@ -25,7 +25,7 @@ export function Tasks({ tasks, handleTaskCheck, handleDeleteTask, completedTasks
                 </div>
                 <div className={style.tasksComplete}>
                     <p>Concluidas</p>
-                    <span>{completedTasks}</span>
+                    <span>{`${completedTasks} de ${tasks.length}`}</span>
                 </div>
             </div>
             <div className={style.tasks}>
@@ -38,14 +38,13 @@ export function Tasks({ tasks, handleTaskCheck, handleDeleteTask, completedTasks
                 ) : (
                     <>
                         {tasks.map((task) => (
-                            <div key={task.id} className={style.taskList}>
+                            <div key={task.id} className={task.isChecked ? style.taskCheck : style.taskList}>
                                 <input
                                     type="checkbox"
                                     checked={task.isChecked}
                                     onChange={() => handleTaskCheck(task.id)}
                                 />
                                 <p
-                                    className={task.isChecked ? style.taskCheck : ''}
                                  >{task.task}</p>
                                 <button
                                     onClick={() => handleDeleteTask(task.id)}
