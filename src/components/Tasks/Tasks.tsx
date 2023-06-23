@@ -11,9 +11,11 @@ type TaskType = {
 type TaskProps = {
     tasks: TaskType[],
     handleTaskCheck: (taskId: number) => void,
+    handleDeleteTask: (id: number) => void,
+    completedTasks: number,
 }
 
-export function Tasks({ tasks, handleTaskCheck }: TaskProps) {
+export function Tasks({ tasks, handleTaskCheck, handleDeleteTask, completedTasks }: TaskProps) {
     return (
         <div className={style.tasksContainer}>
             <div className={style.infos}>
@@ -23,7 +25,7 @@ export function Tasks({ tasks, handleTaskCheck }: TaskProps) {
                 </div>
                 <div className={style.tasksComplete}>
                     <p>Concluidas</p>
-                    <span>0</span>
+                    <span>{completedTasks}</span>
                 </div>
             </div>
             <div className={style.tasks}>
@@ -39,12 +41,15 @@ export function Tasks({ tasks, handleTaskCheck }: TaskProps) {
                             <div key={task.id} className={style.taskList}>
                                 <input
                                     type="checkbox"
-                                    className={task.isChecked ? style.taskCheck : ''}
                                     checked={task.isChecked}
                                     onChange={() => handleTaskCheck(task.id)}
                                 />
-                                <p>{task.task}</p>
-                                <button type="button">
+                                <p
+                                    className={task.isChecked ? style.taskCheck : ''}
+                                 >{task.task}</p>
+                                <button
+                                    onClick={() => handleDeleteTask(task.id)}
+                                    type="button">
                                     <img src={trash} alt="trash" />
                                 </button>
                             </div>

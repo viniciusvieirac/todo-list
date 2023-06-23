@@ -11,6 +11,7 @@ type TaskType = {
 
 export function Form(){
     const [inputTask, setInputTask] = useState<string>('');
+    const [completedTasks, setCompletedTasks] = useState<number>(0);
     const [tasks, setTasks] =useState<TaskType[]>([]);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -38,12 +39,11 @@ export function Form(){
         const savedTasks = localStorage.getItem('tasks');
         const tasksFromLocalStorage: TaskType[] = savedTasks ? JSON.parse(savedTasks) : [];
       
-        // Atualiza isChecked com base nos valores salvos no localStorage
         const updatedTasks = tasksFromLocalStorage.map(task => ({
           ...task,
           isChecked: Boolean(task.isChecked),
         }));
-      
+        
         setTasks(updatedTasks);
       }, []);
       
@@ -62,8 +62,15 @@ export function Form(){
           }
           return task;
         });
-        console.log('clicou');
         
+        setTasks(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+        const completedCount = updatedTasks.filter(task => task.isChecked).length;
+        setCompletedTasks(completedCount);
+      };
+
+      const handleDeleteTask = (id: number) => {
+        const updatedTasks = tasks.filter((task) => task.id !== id);
         setTasks(updatedTasks);
         localStorage.setItem('tasks', JSON.stringify(updatedTasks));
       };
@@ -89,7 +96,12 @@ export function Form(){
                     }} 
                 />
             </button>
-            <Tasks tasks={tasks} handleTaskCheck={handleTaskCheck} />
+            <Tasks 
+                tasks={tasks}
+                completedTasks={completedTasks}
+                handleTaskCheck={handleTaskCheck} 
+                handleDeleteTask={handleDeleteTask}
+            />
         </form>
     )
 }
